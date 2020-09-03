@@ -1,0 +1,15 @@
+{
+	"type":"minecraft:block",
+	"pools":[
+		{
+			"rolls":1,
+			"entries":[
+				{
+					"type":"minecraft:item",
+					"count":3,
+					"name":"pobladosmod:ejemplo_block"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,12 @@
+{
+	"item.pobladosmod.ejemplo_item"		 : "Example Item",
+	"item.pobladosmod.house_generator"		 : "House Generator",
+	"item.pobladosmod.palta"						 : "Palta",
+	"item.pobladosmod.wall_generator"						 : "Wall Generator",
+	
+	
+	
+	"block.pobladosmod.ejemplo_block":"Example Block",
+	
+	"itemGroup.elementos": "Poblados Elements"
+}
