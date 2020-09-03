@@ -5,8 +5,10 @@ import com.zeldem.pobladosmod.PobladosMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -31,7 +33,11 @@ public class House {
 	}
 	
 	public void buildHouse() {
-		Sala principal = new Sala(mundo,entrada,Helpers.rand(4, 12),Helpers.rand(1, 8),Helpers.rand(1, 12),Helpers.rand(3, 12));
+		Sala principal = new Sala(mundo,entrada	,Helpers.rand(2, 6)	
+												,Helpers.rand(1, 3)		
+												,Helpers.rand(1, 4)
+												,Helpers.rand(3, 5));
+		
 	}
 	
 	
@@ -53,12 +59,10 @@ public class House {
 			
 			buildParedes(altura);
 			buildPuertas(Blocks.OAK_DOOR);
+			
+			buildTecho();
 		}
-			public void buildPuertas(Block puerta){
-				mundo.setBlockState(e.up(), puerta.getDefaultState().with(DoorBlock.FACING, orientacion), 3);
-	            mundo.setBlockState(e.add(0, 2, 0), puerta.getDefaultState().with(DoorBlock.HALF, DoubleBlockHalf.UPPER).with(DoorBlock.FACING, orientacion), 3);
-				
-			}
+			
 		
 		
 		
@@ -70,7 +74,6 @@ public class House {
 			switch(orientacion) {
 				case SOUTH:
 					 default:{
-						 PobladosMod.LOGGER.debug("Facing South");
 					a=u=delta_d;
 					b=t=-delta_i;
 					c=s=frente;
@@ -79,7 +82,6 @@ public class House {
 					break;
 				}
 				case NORTH:{
-					PobladosMod.LOGGER.debug("Facing North");
 					a=u=delta_d;
 					b=t=-delta_i;
 					c=r=0;
@@ -87,7 +89,6 @@ public class House {
 					break;
 				}
 				case WEST:{
-					PobladosMod.LOGGER.debug("Facing West");
 					a=u=0;
 					b=t=-frente;
 					c=r=delta_i;
@@ -95,7 +96,6 @@ public class House {
 					break;
 				}
 				case EAST:{
-					PobladosMod.LOGGER.debug("Facing East");
 					a=t=frente;
 					b=u=0;
 					c=r=delta_i;
@@ -123,7 +123,59 @@ public class House {
 			}
 		}
 		
+		public void buildPuertas(Block puerta){
+			mundo.setBlockState(e.up(), puerta.getDefaultState().with(DoorBlock.FACING, orientacion), 3);
+            mundo.setBlockState(e.add(0, 2, 0), puerta.getDefaultState().with(DoorBlock.HALF, DoubleBlockHalf.UPPER).with(DoorBlock.FACING, orientacion), 3);
+			
+		}
 		
+		public boolean buildTecho() {
+			
+			int a,b,c,d;
+			
+			switch(orientacion) {
+			case SOUTH:
+				 default:{
+					 a=-delta_i;
+					 b=delta_d;
+					 c=0;
+					 d=frente;
+				break;
+			}
+			case NORTH:{
+				a=-delta_i;
+				 b=delta_d;
+				 c=-frente;
+				 d=0;
+				break;
+			}
+			case EAST:{
+				a=0;
+				 b=frente;
+				 c=-delta_d;
+				 d=delta_i;
+				break;
+			}
+			case WEST:{
+				a=-frente;
+				b=0;
+				c=-delta_d;
+				d=delta_i;
+				break;
+			}
+			
+		}
+			if(!mundo.isRemote) {
+				for(int i=e.getX()+a;i<=e.getX()+b;i++) {
+					for(int j=e.getZ()+c;j<=e.getZ()+d;j++) {
+						mundo.setBlockState(new BlockPos(i,e.getY()+altura,j), Blocks.ACACIA_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP), 3);
+					}
+				}
+			}
+			return true;
+			
+			
+		}
 		
 	}
 	
