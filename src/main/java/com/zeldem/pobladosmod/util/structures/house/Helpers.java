@@ -56,5 +56,44 @@ public class Helpers {
 		return true;
 	}
 	
+	public static BlockPos getBlockPos_relative(BlockPos e, Direction ori,int i,int j,int k) {
+		BlockPos b;
+		int x,y,z;
+		switch(ori) {
+			case 	SOUTH:
+			default:{
+				x=i;
+				y=j;
+				z=k;
+				
+				break;
+			}
+			case 	NORTH:{
+				x=-i;
+				y=j;
+				z=-k;
+				break;
+			}
+			case EAST:{
+				x=k;
+				y=j;
+				z=-i;
+				break;
+			}
+			case WEST:{
+				x=-k;
+				y=j;
+				z=i;
+				break;
+			}
+		}
+		b=new BlockPos(e.getX()+x,e.getY()+y,e.getZ()+z);
+		return b;
+	}
+	
+	public static String printBlockCoords(BlockPos p) {
+		return "("+p.getX()+","+p.getY()+","+p.getZ()+")";
+	}
+	
 	
 }

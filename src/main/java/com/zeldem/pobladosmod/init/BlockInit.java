@@ -19,7 +19,7 @@ import net.minecraftforge.registries.ObjectHolder;
 @Mod.EventBusSubscriber(modid = PobladosMod.MOD_ID, bus = Bus.MOD)
 public class BlockInit {
 	
-	public static final Block ejemplo_block = null;
+	public static final Block EJEMPLO_BLOCK = null;
 	
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent .Register<Block> event) {
@@ -29,7 +29,7 @@ public class BlockInit {
 	
 	@SubscribeEvent
 	public static void registerBlocksItem(final RegistryEvent .Register<Item> event) {
-		event.getRegistry().register(new BlockItem(ejemplo_block, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("ejemplo_block"));
+		event.getRegistry().register(new BlockItem(EJEMPLO_BLOCK, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("ejemplo_block"));
 	}
 	
 	

@@ -1,6 +1,7 @@
 package com.zeldem.pobladosmod.util.structures.house;
 
 import com.zeldem.pobladosmod.PobladosMod;
+import com.zeldem.pobladosmod.util.structures.house.sala.Sala;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -36,10 +37,36 @@ public class House {
 	public void buildHouse() {
 		if(!mundo.isRemote) {
 		Sala principal = new Sala(mundo,entrada	,orientacion
-												,Helpers.rand(3, 6)
-												,Helpers.rand(2, 5)
-												,Helpers.rand(1, 4)
-												,Helpers.rand(4, 7));
+												,Helpers.rand(2, 4)
+												,Helpers.rand(2, 4)
+												,Helpers.rand(6, 8)
+												,Helpers.rand(4, 6));
+		
+		
+		
+		
+		PobladosMod.LOGGER.debug("principal:"+principal);
+		
+		
+		Sala subSalaIzq= new Sala(mundo,principal.getALeftEntrance(),orientacion.rotateYCCW()	
+																	,Helpers.rand(1, 4)
+																	,Helpers.rand(1, 4)
+																	,principal.h-1
+																	,principal.frente/2);
+		PobladosMod.LOGGER.debug("izq:"+subSalaIzq);
+		
+		Sala subSalaDer= new Sala(mundo,principal.getARightEntrance(),orientacion.rotateY()	
+				,Helpers.rand(1, 4)
+				,Helpers.rand(1, 4)
+				,principal.h-1
+				,principal.frente/2);
+		PobladosMod.LOGGER.debug("der:"+subSalaDer);
+		
+		Sala portico= new Sala(mundo,entrada,orientacion.rotateY().rotateY()	
+				,Helpers.rand(1, 4)
+				,Helpers.rand(1, 4)
+				,principal.h-1
+				,4,false,false,false,false);
 		}
 	}
 	
