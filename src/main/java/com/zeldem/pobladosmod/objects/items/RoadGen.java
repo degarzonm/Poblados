@@ -35,7 +35,7 @@ public class RoadGen extends Item{
 				tempB=new BlockPos(pos.getX(),pos.getY(),pos.getZ());
 				PobladosMod.LOGGER.debug("second block catch at" +Helpers.printBlockCoords(tempB)+"\n building road...");
 				
-				Road camino= new Road(mundo,tempA,tempB,2);
+				Road camino= new Road(mundo,tempA,tempB,4,null);
 				camino.buildRoad();
 				
 			}
